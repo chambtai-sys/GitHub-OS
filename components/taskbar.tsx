@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { GitBranchIcon, SearchIcon, BellIcon, UserIcon } from "lucide-react"
+import { GitBranchIcon, SearchIcon, BellIcon, UserIcon, ExternalLinkIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 interface TaskbarProps {
@@ -23,6 +23,10 @@ const windowTitles: Record<string, string> = {
 }
 
 export function Taskbar({ openWindows, activeWindow, onFocusWindow, onOpenWindow }: TaskbarProps) {
+  const handleGitHubRepoClick = () => {
+    window.open("https://github.com/chambtai-sys/GitHub-OS", "_blank")
+  }
+
   return (
     <div className="h-12 bg-card border-t border-border flex items-center justify-between px-4">
       {/* Left side - Start menu and open windows */}
@@ -60,6 +64,17 @@ export function Taskbar({ openWindows, activeWindow, onFocusWindow, onOpenWindow
 
       {/* Right side - System tray */}
       <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 px-2 text-xs flex items-center gap-1 hover:bg-accent"
+          onClick={handleGitHubRepoClick}
+          title="Open GitHub Repository"
+        >
+          <ExternalLinkIcon className="h-3 w-3" />
+          <span className="hidden sm:inline">GitHub Repo</span>
+        </Button>
+
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0 relative">
           <BellIcon className="h-4 w-4" />
           <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs bg-destructive">3</Badge>
